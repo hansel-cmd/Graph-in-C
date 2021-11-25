@@ -35,7 +35,7 @@ typedef nodePtr *AdjList; // dynamic
 AdjList createAdjacencyList(EdgeList E)
 {
     AdjList adj_list;
-    adj_list = (AdjList) calloc (MAX_VERTEX, sizeof(node));
+    adj_list = (AdjList) calloc (MAX_VERTEX, sizeof(nodePtr));
     if (adj_list) {
 
         for (int i = 0; i < E.edge_count; i++) {
@@ -50,7 +50,7 @@ AdjList createAdjacencyList(EdgeList E)
             while (*trav) trav = &(*trav)->next;
 
             // insert its adjacent vertex
-            *trav = (nodePtr) calloc (MAX_VERTEX, sizeof(node));
+            *trav = (nodePtr) calloc (1, sizeof(node));
             if (*trav) (*trav)->vertex = v;
         }
     }
