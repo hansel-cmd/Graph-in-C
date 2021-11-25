@@ -65,8 +65,20 @@ AdjList createAdjacencyList(EdgeList E)
     return adj_list;
 }
 
+void displayAdjacencyList(AdjList adj_list)
+{
+    // table format
+    for (int i = 0; i < MAX_VERTEX; i++) {
+        printf("\n%d : ", i);
 
-
+        nodePtr trav;
+        trav = adj_list[i];
+        while (trav) {
+            printf("%2d ", trav->vertex);
+            trav = trav->next;
+        }
+    }
+}
 
 int main()
 {
