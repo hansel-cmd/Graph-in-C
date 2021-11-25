@@ -14,6 +14,8 @@
 // we divide 2 because this is an undirected graph.
 #define MAX 10
 
+/* Data Structure Definition */
+
 // An unweighted, undirected graph
 typedef struct {
     int vertex;
@@ -92,5 +94,22 @@ int main()
 	List = createAdjacencyList(E);
 	
 	displayAdjacencyList(List);
+
+    /**
+    *
+    *           expected output:
+    *           0: -> 1 -> 2 -> 3 -> 4
+    *           1: -> 0 -> 2
+    *           2: -> 0 -> 1 -> 3 -> 4
+    *           3: -> 0 -> 2 -> 4
+    *           4: -> 0 -> 2 -> 3
+    * 
+    * 
+    * 
+    **/
+
+
+
+
 	return 0;
 }
