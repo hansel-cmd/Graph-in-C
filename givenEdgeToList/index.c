@@ -29,3 +29,56 @@ typedef struct node {
     int vertex;
     struct node *next;
 } node, *nodePtr;
+
+typedef nodePtr *AdjList; // dynamic
+
+AdjList createAdjacencyList(EdgeList E)
+{
+    AdjList adj_list;
+    adj_list = (AdjList) calloc (MAX_VERTEX, sizeof(node));
+    if (adj_list) {
+
+        nodePtr *trav;
+        for (int i = 0; i < E.edge_count; i++) {
+            
+            // get the vertex and adjacent vertex
+            int u = E.Edge[i].vertex;
+            int v = E.Edge[i].adj_vertex;
+
+            // traverse until the end of u
+            trav = &adj_list[u];
+            while (*trav) trav = &(*trav)->next;
+
+            // insert its adjacent vertex
+            *trav = (nodePtr) calloc (1, sizeof(node));
+            if (*trav) (*trav)->vertex = v;
+
+            // traverse until the end of v
+            trav = &adj_list[v];
+            while (*trav) trav = &(*trav)->next;
+
+            // insert its adjacent vertex
+            *trav = (nodePtr) calloc (1, sizeof(node));
+            if (*trav) (*trav)->vertex = u;
+        }
+    }
+    return adj_list;
+}
+
+
+
+
+int main()
+{
+	EdgeList E = {
+				{{0,1},{0,2},{0,3},{0,4},
+					{1,2},{2,3},{2,4},{3,4}}, 
+				8
+				};
+	
+	AdjList List;
+	List = createAdjacencyList(E);
+	
+	displayAdjacencyList(List);
+	return 0;
+}
