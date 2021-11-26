@@ -62,7 +62,7 @@ void DFS(Graph G, int visited[], int current_node)
     // to suggest that we've seen this node alrdy
     visited[current_node] = 1;
 
-    // display what visited node.
+    // display the visited node
     printf("%d ", current_node);
     
     // we traverse from this node
