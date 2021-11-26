@@ -37,7 +37,7 @@ typedef nodePtr *AdjList; // dynamic
 AdjList createAdjacencyList(EdgeList E)
 {
     AdjList adj_list;
-    adj_list = (AdjList) calloc (MAX_VERTEX, sizeof(node));
+    adj_list = (AdjList) calloc (MAX_VERTEX, sizeof(nodePtr));
     if (adj_list) {
 
         nodePtr *trav;
