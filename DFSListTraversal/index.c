@@ -56,9 +56,39 @@ void populateGraph(Graph G, EdgeList E)
     }
 }
 
-void DFS(Graph G)
+void DFS(Graph G, int visited[], int current_node)
+{
+    // set the current_node to 1,
+    // to suggest that we've seen this node alrdy
+    visited[current_node] = 1;
+
+    // display what visited node.
+    printf("%d ", current_node);
+    
+    // we traverse from this node
+    nodePtr trav;
+    trav = G[current_node];
+    while (trav) {
+        // if the adjacent vertex of the current_node 
+        // is not yet visited, then we perform DFS 
+        // to that vertex. Then we continue 
+        // to the next adjacent vertex of the current_node
+        if (!visited[trav->adj_vertex])
+            DFS(G, visited, trav->adj_vertex);
+        trav = trav->next;
+    }
+    
+    // we 'back track' from here
+    // because we cannot go any deeper
+    return;
+}
+
+void DFSTraversal(Graph G, int starting_point)
 {
     // todo
+    int visited[MAX_VERTEX];
+    for (int i = 0; i < MAX_VERTEX; i++) visited[i] = 0;
+    DFS(G, visited, starting_point);
 }
 
 void displayGraph(Graph G)
@@ -72,6 +102,7 @@ void displayGraph(Graph G)
             trav = trav->next;
         }
     }
+    printf("\n");
 }
 
 int main()
@@ -93,7 +124,8 @@ int main()
     /* =------------------------------------------------= */
     displayGraph(G);
 
-    DFS(G);
+    int starting_point = 0;
+    DFSTraversal(G, starting_point);
 
     return 0;
 }
