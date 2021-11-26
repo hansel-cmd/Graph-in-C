@@ -57,7 +57,7 @@ void DFS(Graph G, int starting_point)
 {
     // initialize all vertices to be unvisited
     int visited[MAX_VERTEX];
-    for (int i = 0; i < MAX_VERTEX; i++) visited[i] = 0;
+    memset(visited, 0, sizeof(visited));
 
     // we set this node as visited
     visited[starting_point] = 1;

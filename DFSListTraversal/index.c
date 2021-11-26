@@ -87,7 +87,7 @@ void DFSTraversal(Graph G, int starting_point)
 {
     // todo
     int visited[MAX_VERTEX];
-    for (int i = 0; i < MAX_VERTEX; i++) visited[i] = 0;
+    memset(visited, 0, sizeof(visited));
     DFS(G, visited, starting_point);
 }
 
