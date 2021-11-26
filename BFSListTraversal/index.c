@@ -78,23 +78,35 @@ void displayGraph(Graph G)
 
 void BFS(Graph G, int starting_point)
 {
+    int visited[MAX_VERTEX];
+    memset(visited, 0, sizeof(visited));
+
     // Using Queue Data Structure
     int queue[1000];
     int front = 0, rear = -1;
 
     // enqueue the starting vertex
     queue[++rear] = starting_point;
-    printf("%d ", starting_point);
 
     // If queue not yet empty, there is/are 
     // still neighboring node/s to be visited
-    while (front != rear) {
-        // dequeue
+    while (front <= rear) {
+        // dequeue, and mark as visited
         int current_vertex = queue[front++];
+        printf("%d ", current_vertex);
+        visited[current_vertex] = 1;
 
         // visit ALL the adjacent vertices
+        nodePtr trav;
+        trav = G[current_vertex];
+        while (trav) {
+            // Insert the current adjacent vertex
+            // to the queue IF not yet visited
+            if (!visited[trav->adj_vertex])
+                queue[++rear] = trav->adj_vertex;
+            trav = trav->next;
+        }
     }
-
 }
 
 int main()
