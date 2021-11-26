@@ -69,7 +69,7 @@ void DFS(Graph G, int visited[], int current_node)
     nodePtr trav;
     trav = G[current_node];
     while (trav) {
-        // if the adjacent vertex of the current_node 
+        // if the FIRST adjacent vertex of the current_node 
         // is not yet visited, then we perform DFS 
         // to that vertex. Then we continue 
         // to the next adjacent vertex of the current_node
