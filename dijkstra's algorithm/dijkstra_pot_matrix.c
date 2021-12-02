@@ -6,6 +6,8 @@
 #include "helper.h"
 
 /**
+ *      Dijkstra's algorithm is used to get the shortest path from 1 vertex to the rest.
+ *      This is called single source shortest path.
  *
  *      This dijkstra's algorithm follows the concept of a minimum priority queue.
  *       Here, we set the distance of every other vertex except the source vertex

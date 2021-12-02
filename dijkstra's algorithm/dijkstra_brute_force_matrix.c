@@ -7,6 +7,9 @@
 
 
 /**
+ *      Dijkstra's algorithm is used to get the shortest path from 1 vertex to the rest.
+ *      This is called single source shortest path.
+ * 
  *
  *      This is the native dijkstra's algortihm with O(n^2) time complexity.
  *          Although it is slower compared to the version where I use min heap,
