@@ -65,13 +65,14 @@ int *dijkstra(MATRIX M, int source)
         // $$ distance[neighbor] > distance[next_vertex] + M[next_vertex][neighbor]
         // known distance of neighbor  > distance(vertex) + distance(vertex -> neighbor)
         for (int neighbor = 0; neighbor < MAX_VERTEX; neighbor++) {
+            // we can make this as 1 if statement with multi condition
+            // but it will be harder to read. Also, It won't make your code faster.
             if (!visited[neighbor]) {
                 if (distance[neighbor] > distance[next_vertex] + M[next_vertex][neighbor])
                     distance[neighbor] = distance[next_vertex] + M[next_vertex][neighbor];
             }
         }
     }
-
 
     return distance;
 }
