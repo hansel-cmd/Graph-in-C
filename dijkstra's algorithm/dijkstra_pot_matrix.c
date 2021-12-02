@@ -5,6 +5,21 @@
 #include "struct_definition.h"
 #include "helper.h"
 
+/**
+ *
+ *      This dijkstra's algorithm follows the concept of a minimum priority queue.
+ *       Here, we set the distance of every other vertex except the source vertex
+ *          to be INFINITY because we still have to visit them in order for us to
+ *          know the distance.
+ * 
+ *       Since this algorthim finds the shortest path from 1 source to every other vertex,
+ *          it makes sense to use a minimum priority queue. :)
+ *      Although it is tedious to implement because u have to create insert and deleteMin()
+ *         functions for the priority queue, it is faster than the other implementation.
+ * 
+ * 
+ **/
+
 typedef struct {
     int vertex;
     int weight;
