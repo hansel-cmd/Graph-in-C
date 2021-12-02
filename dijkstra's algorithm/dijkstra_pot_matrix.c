@@ -66,25 +66,42 @@ Node deleteMin(PQ *Q)
 // O (N + V log N)
 int *dijkstra(MATRIX M, int source)
 {
-    
+    // create an empty PQ
     PQ Q = {.last_index = -1};
+
+    // initialize distance to be infinity
+    // This time we give all vertices a distance of infinity
+    // because we have to first visit the node before we get
+    // to know the distance
     int *distance = (int *) malloc (MAX_VERTEX * sizeof(int));
     if (!distance) return NULL;
     for (int i = 0; i < MAX_VERTEX; i++) distance[i] = INFINITY;
 
+    // starting from the source, we let the distance be 0
+    // source -> source (it has a distance of 0)
+    // We insert that to PQ because this is our first vertex
     distance[source] = 0;
     insert(&Q, source, 0);
 
     Node temp;
     // O (N) where N is the number of vertices
+    // Until PQ is empty, we perform the operation.
     while (Q.last_index > -1) {
+        // we have to remove the minimum distance from the PQ
         temp = deleteMin(&Q); // O (log n)
         int current_vertex = temp.vertex;
 
         // O (V) where n is the number of neighboring vertices
+        // Get all the neighboring vertex relative to the current_vertex
         for (int neighbor = 0; neighbor < MAX_VERTEX; neighbor++) {
+            // The vertex and the neighboring vertex must be connected 
+            // (there is a path - which means the distance cannot be INFINITY)
+            // The neighboring vertex must not be the current vertex
             if (M[current_vertex][neighbor] != INFINITY && M[current_vertex][neighbor] != 0) {
-
+                
+                // if there is a shorter path through the current_vertex going to the neighboring vertex
+                // then we update the distance of the neighboring vertex and then insert that to the PQ
+                // Note that inserting a vertex to the PQ will make the node "visited" or some sort.
                 if (distance[neighbor] > distance[current_vertex] + M[current_vertex][neighbor]) {
                     distance[neighbor] = distance[current_vertex] + M[current_vertex][neighbor];
                     insert(&Q, neighbor, distance[neighbor]); // O (log n)
