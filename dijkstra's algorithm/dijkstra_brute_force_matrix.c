@@ -87,16 +87,14 @@ int *dijkstra(MATRIX M, int source)
         }
     }
 
-    printf("\n");
-    for (int i = 0; i < MAX_VERTEX; i++)
-        printf("%d ", path[i]);
-
     return distance;
 }
 
 void displayShortestDistance(int distance[], int source)
 {
-
+    printf("\n\nSource vertex: %d", source);
+    for (int i = 0; i < MAX_VERTEX; i++)
+        printf("\nShortest distance from %d to %d: %d", source, i, distance[i]);
 }
 
 
