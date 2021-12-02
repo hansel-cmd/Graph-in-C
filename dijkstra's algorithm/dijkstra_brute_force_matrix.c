@@ -13,6 +13,16 @@ int *dijkstra(MATRIX M, int source)
     if (!distance)
         return NULL;
 
+    // OPTIONAL - BUT USUALLY RETURNED TOGETHER WITH THE SHORTEST DISTANCE
+    // create a path variable containing the shortest path from
+    // the source to the index (vertex)
+    int *path = (int *) malloc (MAX_VERTEX * sizeof(int));
+    if (!path)
+        return NULL;
+    for (int i = 0; i < MAX_VERTEX; i++) path[i] = source;
+    // for some reason, memset won't work sa vscode but works fine sa uban
+    // memset(path, source, sizeof(int) * MAX_VERTEX);
+
     // Create a list of vertices
     int vertices[MAX_VERTEX];
     for (int i = 0; i < MAX_VERTEX; i++) vertices[i] = i;
@@ -36,6 +46,7 @@ int *dijkstra(MATRIX M, int source)
 
     // We set source as our next vertex
     int next_vertex = source;
+    // path[next_vertex] = -1; <- this is optional.
 
     // we start from 1 because there are n - 1 vertices left to explore.
     for (int i = 1; i < MAX_VERTEX; i++) {
@@ -68,13 +79,24 @@ int *dijkstra(MATRIX M, int source)
             // we can make this as 1 if statement with multi condition
             // but it will be harder to read. Also, It won't make your code faster.
             if (!visited[neighbor]) {
-                if (distance[neighbor] > distance[next_vertex] + M[next_vertex][neighbor])
+                if (distance[neighbor] > distance[next_vertex] + M[next_vertex][neighbor]) {
                     distance[neighbor] = distance[next_vertex] + M[next_vertex][neighbor];
+                    // path[neighbor] = next_vertex; <- this is optional.
+                }
             }
         }
     }
 
+    printf("\n");
+    for (int i = 0; i < MAX_VERTEX; i++)
+        printf("%d ", path[i]);
+
     return distance;
+}
+
+void displayShortestDistance(int distance[], int source)
+{
+
 }
 
 
@@ -112,8 +134,9 @@ void main()
      **/
 
 
-    int source = 0;
+    int source = 1;
     int *shortest_distance = dijkstra(M, source);
+    displayShortestDistance(shortest_distance, source);
 
 }
 
