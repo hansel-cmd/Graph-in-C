@@ -132,7 +132,7 @@ void main()
      **/
 
 
-    int source = 1;
+    int source = 0;
     int *shortest_distance = dijkstra(M, source);
     displayShortestDistance(shortest_distance, source);
 
