@@ -5,6 +5,18 @@
 #include "struct_definition.h"
 #include "helper.h"
 
+
+/**
+ *
+ *      This is the native dijkstra's algortihm with O(n^2) time complexity.
+ *          Although it is slower compared to the version where I use min heap,
+ *          this algorithm is easy to follow and visualize. It is also
+ *              easy to implement esp if the language used is python or javascript
+ * 
+ * 
+ **/
+
+
 int *dijkstra(MATRIX M, int source)
 {
     // create a distance variable containing the shortest distance
