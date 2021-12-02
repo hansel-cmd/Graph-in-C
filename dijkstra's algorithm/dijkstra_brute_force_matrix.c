@@ -13,6 +13,8 @@
  *          this algorithm is easy to follow and visualize. It is also
  *              easy to implement esp if the language used is python or javascript
  * 
+ *   Your task is to create the native dijkstra's algorithm in an adjacency list representation.
+ *              Hint: It is easier if u convert the list representation to matrix representation.
  * 
  **/
 

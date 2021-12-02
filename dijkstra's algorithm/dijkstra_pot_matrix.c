@@ -18,6 +18,12 @@
  *         functions for the priority queue, it is faster than the other implementation.
  * 
  * 
+ *      Your task is to create the dijkstra's algorithm using a 
+ *          priority queue in an adjacency list representation.
+ *              Hint: U do not need to convert the adj list to adj matrix unlike the
+ *              native dijkstra's algorithm.
+ * 
+ * 
  **/
 
 typedef struct {
