@@ -8,6 +8,9 @@
 /**
  *              This is Prim's algorithm. It is used for finding the Minimum Spanning Tree of a graph.
  *              This algo implementation uses minimum priority queue.
+ * 
+ *              This algorithm runs at O(E log V). It is significantly faster than the previous
+ *              implementation, but is longer to write.
  *              
  *              What it returns is the minimum spanning tree, therefore, a list of edges.
  * 
@@ -15,15 +18,17 @@
 
 typedef struct {
     int vertex;
+    int adj_vertex;
     int weight;
 } Node;
 
+
 typedef struct {
-    Node node[MAX_VERTEX];
+    Node node[MAX]; // MAX since there are MAX (10) edges in a MAX_VERTEX (5)
     int last_index;
 } PQ;
 
-void insert(PQ *Q, int vertex, int weight)
+void insert(PQ *Q, int vertex, int adj_vertex, int weight)
 {
     if (Q->last_index < MAX_VERTEX - 1) {
 
@@ -37,6 +42,7 @@ void insert(PQ *Q, int vertex, int weight)
             parent = (parent - 1) / 2;
         }
         Q->node[current].vertex = vertex;
+        Q->node[current].adj_vertex = adj_vertex;
         Q->node[current].weight = weight;
     }
 }
@@ -71,10 +77,15 @@ Node deleteMin(PQ *Q)
     return node;
 }
 
+// O (V(log V + E log V))
+// O (V log V + VE log V)
+// O (VE log V) => VE is just going over all edges for each vertex, so V * E is just E
+// O (E log V)
 edgeType *prim(MATRIX M, int source)
 {
     // MAX - 1 edges
     edgeType *mst = (edgeType *) malloc (sizeof(edgeType) * (MAX_VERTEX - 1));
+    int edge_count = 0;
     if (!mst) return NULL;
 
     // for visited nodes
@@ -84,16 +95,46 @@ edgeType *prim(MATRIX M, int source)
     // initialize priority queue
     PQ queue = {.last_index = -1};
 
-    // insert the source vertex to the queue
-    // and mark it as visited
-    insert(&queue, source, 0);
-    visited[source] = 1;
+    // Insert all edges from the source vertex
+    // we need to insert all because we need to get the minimum edge
+    for (int adj_vertex = 0; adj_vertex < MAX_VERTEX; adj_vertex++) {
+        // we only insert if there is a path, and
+        // the path is not from the vertex to itself
+        if (M[source][adj_vertex] != INFINITY && source != adj_vertex)
+            insert(&queue, source, adj_vertex, M[source][adj_vertex]);
+    }
 
-    
 
+    // Continue until there are no vertices left to be visited
+    // OR until we have MAX_VERTEX - 1 edge count
+    // O (log V)
+    while (queue.last_index > -1 && edge_count < MAX_VERTEX - 1) {
 
+        // get the next edge
+        Node edge = deleteMin(&queue); // O (log V)
+        int vertex = edge.vertex; // first vertex of the pair
+        int adj_vertex = edge.adj_vertex; // second vertex of the pair
 
+        // if this edge has already been passed through, we skip
+        if (visited[vertex] && visited[adj_vertex]) continue;
 
+        // otherwise, we mark the vertices of this edge as visited
+        visited[vertex] = visited[adj_vertex] = 1;
+
+        // add this to the mst => since this edge contains the minimum cost
+        mst[edge_count].vertex = vertex;
+        mst[edge_count++].adj_vertex = adj_vertex;
+
+        // Get all the next edges from the current adj_vertex
+        // O (E)
+        for (int current_vertex = 0; current_vertex < MAX_VERTEX; current_vertex++) {
+            // if the current vertex (a.k.a - next_vertex of the current adj_vertex)
+            // is not yet visited, and an edge is present from adj_vertex to this current_vertex
+            // O (log V)
+            if (!visited[current_vertex] && M[adj_vertex][current_vertex] != INFINITY)
+                insert(&queue, adj_vertex, current_vertex, M[adj_vertex][current_vertex]);
+        }
+    }
 
     return mst;
 }
@@ -115,7 +156,7 @@ int main()
         {50, 30, INFINITY, 10, INFINITY}
     };
     displayMatrix(M);
-
+    printf("\n");
     int source = 0;
     edgeType *minimum_cost = prim(M, source);
     displayPrim(minimum_cost);
