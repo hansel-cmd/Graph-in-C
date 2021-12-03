@@ -14,6 +14,13 @@
  *              
  *              What it returns is the minimum spanning tree, therefore, a list of edges.
  * 
+ *              Note: Time Complexity calculation is based on an adjacency list                 
+ *              representation,
+ *              where we only loop the edges and not the vertices. 
+ *              (When we loop the neighboring vertices in a list, we are technically looping
+ *                the number of edges this vertex has. In a matrix, we are really looping
+ *                  all vertices.)
+ * 
  **/
 
 typedef struct {

@@ -6,11 +6,17 @@
 #include "helper.h"
 
 /**
- *              This is Prim's algorithm. It is used for finding the Minimum Spanning Tree of a graph.
- *                   This version of Prim's algorithm is similar to Dijkstra's native style. This algorithm
- *                  can also be implemented using a minimum priority queue to reduce the time complexity.
+ *              This is Prim's algorithm. It is used for finding the Minimum Spanning Tree 
+ *              of a graph.
+ *              This version of Prim's algorithm is similar to Dijkstra's native style. 
+ *              This algorithm can also be implemented using a minimum priority queue 
+ *              to reduce the time complexity.
  * 
- *              Here, this algo implementation runs at O(N^3). Very bad but is easy to write. xD
+ *              Here, this algo implementation runs at O(V^3). 
+ *                  Very bad but is easy to write. xD
+ * 
+ *              Note: Time Complexity calculation is based on an adjacency matrix representation.
+ *            
  * 
  *              What it returns is the minimum spanning tree, therefore, a list of edges.
  * 
