@@ -11,17 +11,26 @@
  *      This is called single source shortest path.
  * 
  *
- *      This is the native dijkstra's algortihm with O(n^2) time complexity.
+ *      This is the native dijkstra's algortihm with O(V^2 + E) time complexity.
  *          Although it is slower compared to the version where I use min heap,
  *          this algorithm is easy to follow and visualize. It is also
  *              easy to implement esp if the language used is python or javascript
+ *
+ *      Note: Time Complexity calculation is based on an adjacency list representation,
+ *              where we only loop the edges and not the vertices. 
+ *              (When we loop the neighboring vertices in a list, we are technically looping
+ *                the number of edges this vertex has. In a matrix, we are really looping
+ *                  all vertices.)
  * 
  *   Your task is to create the native dijkstra's algorithm in an adjacency list representation.
  *              Hint: It is easier if u convert the list representation to matrix representation.
  * 
  **/
 
-
+// O (V (V + E))
+// O (V^2 + VE) => VE is just E. Why? This is saying that for each vertex, go over all edges.
+//                  In other words, we repeat the process E times.
+// O (V^2 + E)
 int *dijkstra(MATRIX M, int source)
 {
     // create a distance variable containing the shortest distance

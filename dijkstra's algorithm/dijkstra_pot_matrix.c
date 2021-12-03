@@ -19,6 +19,11 @@
  *      Although it is tedious to implement because u have to create insert and deleteMin()
  *         functions for the priority queue, it is faster than the other implementation.
  * 
+ *      Note: Time Complexity calculation is based on an adjacency list representation,
+ *              where we only loop the edges and not the vertices. 
+ *              (When we loop the neighboring vertices in a list, we are technically looping
+ *                the number of edges this vertex has. In a matrix, we are really looping
+ *                  all vertices.)
  * 
  *      Your task is to create the dijkstra's algorithm using a 
  *          priority queue in an adjacency list representation.
@@ -86,7 +91,9 @@ Node deleteMin(PQ *Q)
     return node;
 }
 
-// O (N + V log N)
+// O (V (log V + E log V))
+// O (V log V + VE log V)
+// O (V+E log V)
 int *dijkstra(MATRIX M, int source)
 {
     // create an empty PQ
@@ -107,14 +114,14 @@ int *dijkstra(MATRIX M, int source)
     insert(&Q, source, 0);
 
     Node temp;
-    // O (N) where N is the number of vertices
+    // O (V) where N is the number of vertices
     // Until PQ is empty, we perform the operation.
     while (Q.last_index > -1) {
         // we have to remove the minimum distance from the PQ
-        temp = deleteMin(&Q); // O (log n)
+        temp = deleteMin(&Q); // O (log V)
         int current_vertex = temp.vertex;
 
-        // O (V) where n is the number of neighboring vertices
+        // O (E)
         // Get all the neighboring vertex relative to the current_vertex
         for (int neighbor = 0; neighbor < MAX_VERTEX; neighbor++) {
             // The vertex and the neighboring vertex must be connected 
@@ -127,7 +134,7 @@ int *dijkstra(MATRIX M, int source)
                 // Note that inserting a vertex to the PQ will make the node "visited" or some sort.
                 if (distance[neighbor] > distance[current_vertex] + M[current_vertex][neighbor]) {
                     distance[neighbor] = distance[current_vertex] + M[current_vertex][neighbor];
-                    insert(&Q, neighbor, distance[neighbor]); // O (log n)
+                    insert(&Q, neighbor, distance[neighbor]); // O (log V)
                 }
             }
         }
