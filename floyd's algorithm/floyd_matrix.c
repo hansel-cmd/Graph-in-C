@@ -37,6 +37,9 @@ int **floyd(MATRIX M)
     // copy all the elements from the original matrix
     // to the matrix that is to be returned
     // U can also use 2 for loops here.
+    // memcpy will only work if both matrix have the same data type.
+    // if 1 data type is a dynamic matrix, then the other one should also be
+    // a dynamic matrix. To be safe, just use 2 for loops.
     // memcpy(&matrix, &M, sizeof(matrix));
     for (int i = 0; i < MAX_VERTEX; i++) {
         for (int j = 0; j < MAX_VERTEX; j++)
