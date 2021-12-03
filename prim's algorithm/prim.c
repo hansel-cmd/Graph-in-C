@@ -8,7 +8,9 @@
 /**
  *              This is Prim's algorithm. It is used for finding the Minimum Spanning Tree of a graph.
  *                   This version of Prim's algorithm is similar to Dijkstra's native style. This algorithm
- *                  can also be implemented using a minimum priority queue.
+ *                  can also be implemented using a minimum priority queue to reduce the time complexity.
+ * 
+ *              Here, this algo implementation runs at O(N^3). Very bad but is easy to write. xD
  * 
  *              What it returns is the minimum spanning tree, therefore, a list of edges.
  * 
